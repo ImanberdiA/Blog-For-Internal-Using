@@ -1,0 +1,153 @@
+﻿@using Blog.Models
+@model IEnumerable<Post>
+
+<!-- Banner Area Start -->
+<section class="banner-area text-left">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="banner-content-wrapper">
+                    <div class="banner-content">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Banner Area End -->
+<!-- Blog Area Start -->
+<section class="blog-area pt-95 pb-100">
+    <!-- Client Area Strat -->
+    <section class="client-area pb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-12">
+                    <div class="section-title text-center">
+                        <h2>Цитата дня</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="testimonial-owl">
+                            <div class="col-xs-12">
+                                <div class="single-testimonial">
+                                    <i class="zmdi zmdi-quote"></i>
+                                    <p>Ваша работа заполнит большую часть жизни и единственный способ быть полностью довольным – делать то, что по-вашему является великим делом. И единственный способ делать великие дела – любить то, что вы делаете. </p>
+                                    <h3>Стив Джобс</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Client Area End -->
+
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-12">
+            <h3>Посты</h3>
+        </div>
+    </div>
+
+    @if (Model.Count() == 0)
+    {
+        <h4>Нет постов</h4>
+    }
+    @foreach (var post in Model)
+    {
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-12">
+                <div class="single-blog pb-30">
+                    <div class="blog-content">
+                        <h3>@post.Title</h3>
+                        <h6>Автор: @post.Author.UserName</h6>
+                        @if (post.Text.Length > 120)
+                        {
+                            <p>@post.Text.Substring(0, 120)</p>
+                        }
+                        else
+                        {
+                            <p>@post.Text.Substring(0, post.Text.Length)</p>
+                        }
+
+                        <p>@Html.ActionLink("Читать далее", "GetArticle", "Home", new { id = post.Id }, new { @class = "btn btn-warning" })</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+<!-- Event Area End -->
+
+<!-- Start of Map Area -->
+<div class="map-area">
+    <!-- google-map-area start -->
+    <div class="google-map-area">
+        <!--  Map Section -->
+        <div id="contacts" class="map-area">
+            <div id="googleMap" style="width:100%;height:380px;"></div>
+        </div>
+    </div>
+</div>
+<!-- End of Map Area -->
+<!-- Footer Area Start -->
+<footer class="footer-area bg-gray">
+    <div class="footer-widget-area bg-3 pt-98 pb-90 fix">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="single-footer-widget">
+                        <a href="index.html"><img src="~/Assets/img/logo/logo.png" alt="handstand"></a>
+                        <p><h4>Контактные данные</h4></p>
+                        <ul>
+                            <li><i class="zmdi zmdi-email"></i> ab.imanberdi@gmail.com</li>
+                            <li><i class="zmdi zmdi-phone"></i> +7-966-191-10-10</li>
+                            <li><i class="zmdi zmdi-home"></i> город Москва, Измайловский пр-т 73/2, кв.604</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-text-area fix bg-coffee ptb-18">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="footer-text text-center">
+                        <span>Copyright &copy; <a href="#">Imanberdi A.</a> 2019. Все права зашищены.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Area End -->
+<!-- All js here -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSLSFRa0DyBj9VGzT7GM6SFbSMcG0YNBM "></script>
+<script>
+    function initialize() {
+        var mapOptions = {
+            zoom: 15,
+            scrollwheel: false,
+            center: new google.maps.LatLng(55.773310, 37.677783)
+        };
+
+        var map = new google.maps.Map(document.getElementById('googleMap'),
+            mapOptions);
+
+
+        var marker = new google.maps.Marker({
+            position: map.getCenter(),
+            animation: google.maps.Animation.BOUNCE,
+            icon: '~/Assets/img/map-marker.png',
+            map: map
+        });
+
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>

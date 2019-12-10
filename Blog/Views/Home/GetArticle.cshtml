@@ -1,0 +1,18 @@
+﻿@model Blog.Models.Post
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<h2>@Model.Title</h2>
+<i>Автор: @Model.Author.UserName</i>
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-12">
+        <div class="single-blog pb-30">
+            <div class="blog-content">
+                <p>@Model.Text</p>
+            </div>
+        </div>
+    </div>
+</div>
